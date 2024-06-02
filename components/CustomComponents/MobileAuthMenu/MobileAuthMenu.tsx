@@ -10,7 +10,11 @@ import Tooltip from "@mui/material/Tooltip";
 
 import IconButton from "@mui/material/IconButton";
 
-export default function MobileAuthMenuUser() {
+export default function MobileAuthMenu({
+  isAuthenticated,
+}: {
+  isAuthenticated: boolean;
+}) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -31,7 +35,15 @@ export default function MobileAuthMenuUser() {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar sx={{ width: 32, height: 32, bgcolor: 'orange' }}>M</Avatar>
+            <Avatar
+              sx={{
+                width: 32,
+                height: 32,
+                bgcolor: isAuthenticated ? "orange" : "red",
+              }}
+            >
+              {isAuthenticated ? "M" : "?"}
+            </Avatar>
           </IconButton>
         </Tooltip>
       </Box>
@@ -70,9 +82,24 @@ export default function MobileAuthMenuUser() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem onClick={handleClose}><Link href={"/profile"}>Profile</Link></MenuItem>
+        {isAuthenticated ? (
+          <Box>
+            <MenuItem onClick={handleClose}>
+              <Link href={"/profile"}>Profile</Link>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem>
+          </Box>
+        ) : (
+          <Box>
+            <MenuItem onClick={handleClose}>
+              <Link href={"/auth/sign-up"}>Sign-Up</Link>
+            </MenuItem>
 
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Link href={"/auth/sign-in"}>Sing-in</Link>
+            </MenuItem>
+          </Box>
+        )}
       </Menu>
     </Box>
   );

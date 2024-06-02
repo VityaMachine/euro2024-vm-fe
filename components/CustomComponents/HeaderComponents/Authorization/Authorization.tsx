@@ -1,9 +1,9 @@
 import { Box } from "@mui/material";
-import MobileAuthMenuUser from "../../MobileAuthMenuUser/MobileAuthMenuUser";
-import MobileAuthMenuGuest from "../../MobileAuthMenuGuest/MobileAuthMenuGuest";
+import MobileAuthMenu from "../../MobileAuthMenu/MobileAuthMenu";
+import DesktopAuthMenu from "../../DesktopAuthMenu/DesktopAuthMenu";
 
 export default function Authorization() {
-  const isAuth = 0;
+  const isAuth = false;
 
   return (
     <Box>
@@ -16,7 +16,7 @@ export default function Authorization() {
           },
         }}
       >
-        {isAuth ? <MobileAuthMenuUser /> : <MobileAuthMenuGuest />}
+        <MobileAuthMenu isAuthenticated={isAuth} />
       </Box>
 
       {/* desktop  */}
@@ -28,7 +28,7 @@ export default function Authorization() {
           },
         }}
       >
-        desktop auth
+        <DesktopAuthMenu isAuthenticated={isAuth} />
       </Box>
     </Box>
   );
