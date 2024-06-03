@@ -12,9 +12,9 @@ export default function DesktopAuthMenu({
         <Box>Auth</Box>
       ) : (
         <Box>
-          <Link href={"/auth/sign-in"}>Sign-in</Link>
+          <Link className="underline hover:underline-offset-4" href={"/auth/sign-in"}>Sign-in</Link>
             {" "}/{" "}
-          <Link href={"/auth/sign-up"}>Sign-Up</Link>
+          <Link className="underline hover:underline-offset-4" href={"/auth/sign-up"}>Sign-Up</Link>
         </Box>
       )}
     </Box>

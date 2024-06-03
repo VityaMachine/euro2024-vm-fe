@@ -1,4 +1,5 @@
-interface ISignUpFormData {
+
+ interface ISignUpFormData {
   firstName: string;
   lastName: string;
   userName: string;
@@ -28,13 +29,26 @@ interface ISignInFormErrors {
   password: string | null;
 }
 
-interface IAuthContext {
-  user: {
-    userName: string,
-    userId: string,
+interface IAuthUser {
+  id: string;
+  username: string;
+  email: string;
+  firstname: string;
+  secondname: string;
+  birthdate: string;
+}
+
+interface ISignInError {
+  data: {
+    message: string
   },
-  token: string,
-  getUser: (token: string) => void
-  signIn: (login: string, password: string) => void;
-  signOut: () => void
+  status: number
+}
+
+interface IAuthContext {
+  user: IAuthUser | null
+  token: string;
+  getUser: (token: string) => void;
+  signIn: (login: string, password: string) => any;
+  signOut: () => void;
 }

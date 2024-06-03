@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect, useContext } from "react";
 import { ChangeEvent, useState } from "react";
 import {
   Box,
@@ -11,12 +11,11 @@ import {
   IconButton,
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import signUpValidator from "@/validation/signUp.validation";
-import axios from "axios";
 
 import Alert from "@mui/material/Alert";
 import AlertTitle from "@mui/material/AlertTitle";
-import Link from "next/link";
+import { AuthContext } from "@/contexts/AuthContext";
+import signInValidator from "@/validation/signIn.validation";
 
 const initialFormDataState = {
   login: "",
@@ -26,18 +25,15 @@ const initialFormDataState = {
 export default function SignInForm() {
   const [formData, setFormData] =
     useState<ISignInFormData>(initialFormDataState);
-  const [formErrors, setformErrors] = useState<null | ISignInFormErrors>(null);
+  const [formErrors, setFormErrors] = useState<null | ISignInFormErrors>(null);
   const [reqError, setReqError] = useState<any>(null);
   const [openNotify, setOpenNotify] = useState<boolean>(true);
 
+  const { signIn } = useContext(AuthContext);
+
   const fieldChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const name = e.target.name;
-    const value =
-      name !== "birthDate"
-        ? e.target.value
-        : e.target.valueAsDate
-        ? e.target.valueAsDate.toISOString().slice(0, 10)
-        : "";
+    const value = e.target.value;
 
     setFormData((data) => ({
       ...data,
@@ -48,8 +44,21 @@ export default function SignInForm() {
   const formSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    console.log('hello');
-    
+    const validateRes = signInValidator(formData);
+
+    if (validateRes) {
+      setFormErrors(validateRes);
+      return;
+    } else {
+      setFormErrors(null);
+    }
+
+    const result = await signIn(formData.login, formData.password);
+   
+
+    if (result && Number(result.status.toString()[0]) === 4) {
+      setReqError(result);
+    }
   };
 
   const handleCloseAlert = (
@@ -61,6 +70,8 @@ export default function SignInForm() {
     }
 
     setOpenNotify(false);
+    setReqError(null)
+
   };
 
   return (
@@ -89,7 +100,7 @@ export default function SignInForm() {
             }}
           >
             <TextField
-              name="userName"
+              name="login"
               label="Login or email"
               size="small"
               onChange={fieldChangeHandler}
@@ -139,7 +150,7 @@ export default function SignInForm() {
       {reqError && (
         <Snackbar
           open={openNotify}
-          autoHideDuration={5000}
+          // autoHideDuration={5000}
           onClose={handleCloseAlert}
           anchorOrigin={{
             vertical: "top",
@@ -155,6 +166,7 @@ export default function SignInForm() {
                 size="small"
                 onClick={() => {
                   setOpenNotify(false);
+                  setReqError(null)
                 }}
               >
                 <CloseIcon fontSize="inherit" />
@@ -164,6 +176,7 @@ export default function SignInForm() {
             <AlertTitle>Error {reqError.status}</AlertTitle>
             {reqError.data.message[0].toUpperCase() +
               reqError.data.message.slice(1, reqError.data.message.length)}
+            {/* asdsadas */}
           </Alert>
         </Snackbar>
       )}

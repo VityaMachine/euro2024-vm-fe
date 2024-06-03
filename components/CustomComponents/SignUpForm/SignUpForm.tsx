@@ -284,7 +284,7 @@ export default function SignUpForm() {
 
           <Box>
             <Typography>
-              <Link href={"/"}>Click here</Link> to go to main page
+              <Link className="underline hover:underline-offset-4" href={"/"}>Click here</Link> to go to main page
             </Typography>
           </Box>
         </Box>
