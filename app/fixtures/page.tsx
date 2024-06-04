@@ -118,6 +118,8 @@ export default function FixturesPage() {
           <Box
             sx={{
               mt: "20px",
+              display: 'flex',
+              justifyContent: 'center'
             }}
           >
             {fixtures && (
