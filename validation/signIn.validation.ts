@@ -8,16 +8,16 @@ const signInValidator = (data: ISignInFormData): ISignInFormErrors | null => {
   };
 
   if (typeof data.login !== "string") {
-    errData.login = "Wrong Login type";
+    errData.login = "Невірний тип паролю";
   } else if (data.login.length < 5 || data.login.length > 30) {
-    errData.login = "Login or email is required";
+    errData.login = "Логін або email є обов'язковими";
   }
 
   if (typeof data.password !== "string") {
     errData.password = "Wrong password type";
   } else if (!passPattern.test(data.password)) {
     errData.password =
-      "Wrong password (must contain UpperCase, LowerCase letter, number and special symbol)";
+      "Невірний пароль. Має містити 1 велику літеру, 1 малу літеру, число та спецсимвол. Символи кирилиці НЕДОСТУПНІ";
   }
 
   if (errData.login || errData.password) {

@@ -3,6 +3,7 @@
 import { AuthContext } from "@/contexts/AuthContext";
 import { Box } from "@mui/material";
 import { useContext } from "react";
+import UnauthorizedError from "./UnauthorizedError";
 
 export default function ProtectedRoute({
   children,
@@ -11,5 +12,17 @@ export default function ProtectedRoute({
 }) {
   const { user } = useContext(AuthContext);
 
-  return <Box>{user ? <>{children}</> : <Box>Unauthorized</Box>}</Box>;
+  return (
+    <Box sx={{
+      mt: '40px'
+    }}>
+      {user ? (
+        <>{children}</>
+      ) : (
+        <Box>
+          <UnauthorizedError />
+        </Box>
+      )}
+    </Box>
+  );
 }

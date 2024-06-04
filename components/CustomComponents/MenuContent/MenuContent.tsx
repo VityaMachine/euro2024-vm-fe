@@ -1,8 +1,18 @@
 "use client";
 
-import { Box, Typography } from "@mui/material";
+import {
+  Box,
+  List,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import ModeToggler from "../ModeToggler/ModeToggler";
+import Link from "next/link";
+
+import CircleIcon from "@mui/icons-material/Circle";
 
 export default function MenuContent() {
   const theme = useTheme();
@@ -24,12 +34,62 @@ export default function MenuContent() {
     >
       <ModeToggler />
 
-      <Box sx={{
-        mx: '15px'
-      }}>
+      <Box
+        sx={{
+          mx: "15px",
+        }}
+      >
         <Typography align="center">Головне меню</Typography>
 
-        
+        <List component="nav">
+          <ListItemButton selected>
+            <Link
+              href={"/"}
+              className="flex justify-between items-center w-full"
+            >
+              Головна
+
+              <CircleIcon
+                sx={{
+                  width: "12px",
+                  height: "12px",
+                }}
+              />
+            </Link>
+          </ListItemButton>
+
+          <ListItemButton >
+            <Link
+              href={"/fixtures"}
+              className="flex justify-between items-center w-full"
+            >
+              Матчі
+
+              {/* <CircleIcon
+                sx={{
+                  width: "12px",
+                  height: "12px",
+                }}
+              /> */}
+            </Link>
+          </ListItemButton>
+
+          <ListItemButton >
+            <Link
+              href={"/standings"}
+              className="flex justify-between items-center w-full"
+            >
+              Результати
+
+              {/* <CircleIcon
+                sx={{
+                  width: "12px",
+                  height: "12px",
+                }}
+              /> */}
+            </Link>
+          </ListItemButton>
+        </List>
       </Box>
     </Box>
   );

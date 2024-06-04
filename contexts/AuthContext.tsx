@@ -1,13 +1,8 @@
 "use client";
 
-import { Snackbar } from "@mui/material";
 import axios, { AxiosError } from "axios";
 import React, { createContext, useEffect, useState } from "react";
-
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
-import { IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/navigation";
 
 export const AuthContext = createContext<IAuthContext>({
   user: {
@@ -30,6 +25,8 @@ export default function AuthProvider({
 }) {
   const [user, setUser] = useState<IAuthUser | null>(null);
   const [token, setToken] = useState("");
+
+  const router = useRouter();
 
   useEffect(() => {
     const savedToken = localStorage.getItem("vm-euro-token");
@@ -98,6 +95,7 @@ export default function AuthProvider({
         localStorage.removeItem("vm-euro-token");
         setUser(null);
         setToken("");
+        router.replace("/");
       }
     } catch (error) {
       console.log(error);

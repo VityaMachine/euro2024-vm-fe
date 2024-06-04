@@ -8,19 +8,19 @@ export default function DesktopAuthMenu({
 }: {
   authUser: IAuthUser | null;
 }) {
-
-  const {signOut} = useContext(AuthContext)
-
+  const { signOut } = useContext(AuthContext);
 
   return (
     <Box>
       {authUser ? (
         <Box>
           <Typography>Привіт {authUser.username}!</Typography>
-          <Box sx={{
-            display: 'flex',
-            justifyContent: "flex-end"
-          }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "flex-end",
+            }}
+          >
             <Link
               className="underline hover:underline-offset-4"
               href={"/profile"}
@@ -30,7 +30,9 @@ export default function DesktopAuthMenu({
             /{" "}
             <Box
               className="underline hover:underline-offset-4 cursor-pointer"
-              onClick={signOut}
+              onClick={() => {
+                signOut();
+              }}
             >
               Вийти
             </Box>

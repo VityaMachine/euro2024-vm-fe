@@ -24,33 +24,33 @@ const signUpValidator = (data: ISignUpFormData): ISignUpFormErrors | null => {
   }
 
   if (data.firstName.length < 3 || data.firstName.length > 30) {
-    errData.firstName = "First name is required (min 3 symbols)";
+    errData.firstName = "Ім'я є обов'язковим (мінімум 3 символи)";
   }
 
   if (typeof data.lastName !== "string") {
     errData.lastName = "Wrong Last name type";
   } else if (data.lastName.length < 3 || data.lastName.length > 30) {
-    errData.lastName = "Last name is required (min 3 symbols)";
+    errData.lastName = "Прізвище є обов'язковим (мінімум 3 символи)";
   }
 
   if (typeof data.userName !== "string") {
     errData.userName = "Wrong Login type";
   } else if (data.userName.length < 5 || data.userName.length > 30) {
-    errData.userName = "Login is required (min 5 symbols)";
+    errData.userName = "Логін є обов'язковим (мінімум 5 символів)";
   }
 
   if (typeof data.birthDate !== "string") {
     errData.birthDate = "Wrong birth date type";
   } else if (data.birthDate.length < 10) {
-    errData.birthDate = "Birth date is required";
+    errData.birthDate = "Дата народження є обов'язковою";
   } else if (bdayDate > today) {
-    errData.birthDate = "Birth date cant be grater then today";
+    errData.birthDate = "Дата народження не може бути більшою ніж поточна дата";
   }
 
   if (typeof data.email !== "string") {
     errData.email = "Wrong email type";
   } else if (!emailPattern.test(data.email)) {
-    errData.email = "Wrong email";
+    errData.email = "Невірний формат електронної пошти";
   }
 
   if (typeof data.password !== "string") {
@@ -61,9 +61,9 @@ const signUpValidator = (data: ISignUpFormData): ISignUpFormErrors | null => {
     data.password !== data.rePassword
   ) {
     errData.password =
-      "Wrong password (must contain UpperCase, LowerCase letter, number and special symbol). Password and repeat password must be equal";
+      "Невірний пароль. Має містити 1 велику літеру, 1 малу літеру, число та спецсимвол. Символи кирилиці НЕДОСТУПНІ. Пароль та повторений пароль мають бути однакові";
     errData.rePassword =
-      "Wrong password (must contain UpperCase, LowerCase letter, number and special symbol). Password and repeat password must be equal";
+      "Невірний пароль. Має містити 1 велику літеру, 1 малу літеру, число та спецсимвол. Символи кирилиці НЕДОСТУПНІ. Пароль та повторений пароль мають бути однакові";
   }
 
   if (
