@@ -1,21 +1,11 @@
 "use client";
 
-import { FormEvent, useEffect } from "react";
+import { FormEvent } from "react";
 import { ChangeEvent, useState } from "react";
-import {
-  Box,
-  Button,
-  Snackbar,
-  TextField,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Button, TextField, Typography } from "@mui/material";
 import signUpValidator from "@/validation/signUp.validation";
 import axios from "axios";
 
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import Link from "next/link";
 
 const initialFormDataState = {
@@ -33,7 +23,6 @@ export default function SignUpForm() {
     useState<ISignUpFormData>(initialFormDataState);
   const [formErrors, setformErrors] = useState<null | ISignUpFormErrors>(null);
   const [reqError, setReqError] = useState<any>(null);
-  const [openNotify, setOpenNotify] = useState<boolean>(true);
   const [signUpSuccess, setSignUpSuccess] = useState<boolean>(false);
 
   const fieldChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,21 +75,20 @@ export default function SignUpForm() {
     }
   };
 
-  const handleCloseAlert = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenNotify(false);
-  };
-
   return (
     <>
       {!signUpSuccess ? (
         <form onSubmit={formSubmitHandler}>
+          <Typography
+            variant="h5"
+            align="center"
+            sx={{
+              my: 4,
+            }}
+          >
+            Вас вітає портал VM-EURO 2024. Для реєстрації заповніть форму
+          </Typography>
+
           <Box
             sx={{
               maxWidth: {
@@ -112,7 +100,7 @@ export default function SignUpForm() {
             }}
           >
             <Typography align="center" variant="h6">
-              Sign Up
+              Реєстрація
             </Typography>
 
             <Box
@@ -130,7 +118,7 @@ export default function SignUpForm() {
             >
               <TextField
                 name="firstName"
-                label="First name"
+                label="Ім'я"
                 size="small"
                 onChange={fieldChangeHandler}
                 value={formData.firstName}
@@ -143,7 +131,7 @@ export default function SignUpForm() {
 
               <TextField
                 name="lastName"
-                label="Last name"
+                label="Прізвище"
                 size="small"
                 onChange={fieldChangeHandler}
                 value={formData.lastName}
@@ -168,7 +156,7 @@ export default function SignUpForm() {
             >
               <TextField
                 name="userName"
-                label="Login (Username)"
+                label="Логін"
                 size="small"
                 onChange={fieldChangeHandler}
                 value={formData.userName}
@@ -189,7 +177,7 @@ export default function SignUpForm() {
                 helperText={
                   formErrors?.birthDate
                     ? formErrors.birthDate
-                    : "Input your birth date"
+                    : "Введіть дату народження"
                 }
                 sx={{
                   width: "100%",
@@ -228,7 +216,7 @@ export default function SignUpForm() {
             >
               <TextField
                 name="password"
-                label="Password"
+                label="Пароль"
                 size="small"
                 type="password"
                 onChange={fieldChangeHandler}
@@ -242,7 +230,7 @@ export default function SignUpForm() {
 
               <TextField
                 name="rePassword"
-                label="Repeat password"
+                label="Повторіть пароль"
                 size="small"
                 type="password"
                 onChange={fieldChangeHandler}
@@ -254,6 +242,19 @@ export default function SignUpForm() {
                 }}
               />
             </Box>
+
+            {reqError && (
+              <Typography
+                sx={{
+                  color: "red",
+                  mt: "10px",
+                }}
+                align="center"
+              >
+                {reqError.data.message[0].toUpperCase() +
+                  reqError.data.message.slice(1, reqError.data.message.length)}
+              </Typography>
+            )}
 
             <Box
               sx={{
@@ -275,51 +276,25 @@ export default function SignUpForm() {
           </Box>
         </form>
       ) : (
-        <Box>
+        <Box sx={{
+          mt: '40px'
+        }}>
           <Typography>
-            Dear {formData.userName}, your account is succesfuly registered.
-            Please click on link on your email {formData.email} on activation
-            link
+            Шановний {formData.userName}, Ваш аккаунт успішно зареєстрований.
+            Для активації аккаутну та подальшого входу, будь-ласка активуйте
+            аккаунт за посиланням на пошті {formData.email}. (Лист може
+            знаходитись в папці <strong>Спам</strong>)
           </Typography>
 
           <Box>
             <Typography>
-              <Link className="underline hover:underline-offset-4" href={"/"}>Click here</Link> to go to main page
+              <Link className="underline hover:underline-offset-4" href={"/"}>
+                Натисніть тут
+              </Link>{" "}
+              для переходу до головної сторінки
             </Typography>
           </Box>
         </Box>
-      )}
-
-      {reqError && (
-        <Snackbar
-          open={openNotify}
-          autoHideDuration={5000}
-          onClose={handleCloseAlert}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-        >
-          <Alert
-            severity="error"
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  setOpenNotify(false);
-                }}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-          >
-            <AlertTitle>Error {reqError.status}</AlertTitle>
-            {reqError.data.message[0].toUpperCase() +
-              reqError.data.message.slice(1, reqError.data.message.length)}
-          </Alert>
-        </Snackbar>
       )}
     </>
   );

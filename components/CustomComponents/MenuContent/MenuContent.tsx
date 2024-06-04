@@ -1,6 +1,6 @@
 "use client";
 
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import ModeToggler from "../ModeToggler/ModeToggler";
 
@@ -20,11 +20,17 @@ export default function MenuContent() {
           sm: "calc(100vh - 74px)",
           md: "100vh",
         },
-        color: "black",
       }}
     >
       <ModeToggler />
-      MenuContent
+
+      <Box sx={{
+        mx: '15px'
+      }}>
+        <Typography align="center">Головне меню</Typography>
+
+        
+      </Box>
     </Box>
   );
 }

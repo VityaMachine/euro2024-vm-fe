@@ -19,7 +19,6 @@ export const AuthContext = createContext<IAuthContext>({
     birthdate: "",
   },
   token: "",
-  getUser: () => {},
   signIn: (token: string) => {},
   signOut: () => {},
 });
@@ -32,12 +31,33 @@ export default function AuthProvider({
   const [user, setUser] = useState<IAuthUser | null>(null);
   const [token, setToken] = useState("");
 
-  const getUser = async (token: string) => {};
+  useEffect(() => {
+    const savedToken = localStorage.getItem("vm-euro-token");
+
+    const getUser = async () => {
+      if (!savedToken) {
+        return;
+      }
+
+      try {
+        const userReqResult = await axios.get("http://localhost:80/users", {
+          headers: {
+            Authorization: `Bearer ${savedToken}`,
+          },
+        });
+
+        setUser(userReqResult.data);
+        setToken(savedToken);
+      } catch (error) {
+        localStorage.removeItem("vm-euro-token");
+        console.log(error);
+      }
+    };
+
+    getUser();
+  }, []);
 
   const signIn = async (login: string, password: string) => {
-    console.log("login: ", login);
-    console.log("password: ", password);
-
     const signInData = {
       login,
       password,
@@ -50,30 +70,46 @@ export default function AuthProvider({
       );
 
       if (resSignInData.status === 200) {
-        localStorage.setItem(
-          "vm-euro-token",
-          JSON.stringify(resSignInData.data.token)
-        );
+        localStorage.setItem("vm-euro-token", resSignInData.data.token);
 
         setUser(resSignInData.data.user);
         setToken(resSignInData.data.token);
       }
     } catch (error) {
       if (error instanceof AxiosError) {
-        // console.log("hello");
-        // console.log(error.response);
-
         return error.response;
       }
     }
   };
 
-  const signOut = async () => {};
+  const signOut = async () => {
+    try {
+      const signOutResult = await axios.patch(
+        "http://localhost:80/auth/logout",
+        undefined,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (signOutResult.status === 204) {
+        localStorage.removeItem("vm-euro-token");
+        setUser(null);
+        setToken("");
+      }
+    } catch (error) {
+      console.log(error);
+      localStorage.removeItem("vm-euro-token");
+      setUser(null);
+      setToken("");
+    }
+  };
 
   const providerValue = {
     user,
     token,
-    getUser,
     signIn,
     signOut,
   };

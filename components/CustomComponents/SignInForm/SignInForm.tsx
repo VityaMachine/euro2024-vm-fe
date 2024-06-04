@@ -2,18 +2,8 @@
 
 import { FormEvent, useEffect, useContext } from "react";
 import { ChangeEvent, useState } from "react";
-import {
-  Box,
-  Button,
-  Snackbar,
-  TextField,
-  Typography,
-  IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
-import Alert from "@mui/material/Alert";
-import AlertTitle from "@mui/material/AlertTitle";
 import { AuthContext } from "@/contexts/AuthContext";
 import signInValidator from "@/validation/signIn.validation";
 
@@ -27,7 +17,6 @@ export default function SignInForm() {
     useState<ISignInFormData>(initialFormDataState);
   const [formErrors, setFormErrors] = useState<null | ISignInFormErrors>(null);
   const [reqError, setReqError] = useState<any>(null);
-  const [openNotify, setOpenNotify] = useState<boolean>(true);
 
   const { signIn } = useContext(AuthContext);
 
@@ -54,132 +43,105 @@ export default function SignInForm() {
     }
 
     const result = await signIn(formData.login, formData.password);
-   
 
     if (result && Number(result.status.toString()[0]) === 4) {
       setReqError(result);
     }
   };
 
-  const handleCloseAlert = (
-    event: React.SyntheticEvent | Event,
-    reason?: string
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpenNotify(false);
-    setReqError(null)
-
-  };
-
   return (
     <>
-      <form onSubmit={formSubmitHandler}>
-        <Box
-          sx={{
-            maxWidth: {
-              xs: "210px",
-              sm: "430px",
-            },
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Typography align="center" variant="h6">
-            Sign In
-          </Typography>
-
+      <Box
+        sx={{
+          maxWidth: "210px",
+        }}
+      >
+        <form onSubmit={formSubmitHandler}>
           <Box
             sx={{
+              maxWidth: {
+                xs: "210px",
+                sm: "430px",
+              },
               display: "flex",
               flexDirection: "column",
-              gap: "10px",
-              mt: "10px",
             }}
           >
-            <TextField
-              name="login"
-              label="Login or email"
-              size="small"
-              onChange={fieldChangeHandler}
-              value={formData.login}
-              error={formErrors?.login ? true : false}
-              helperText={formErrors?.login}
-              sx={{
-                width: "100%",
-              }}
-            />
+            <Typography align="center" variant="h6">
+              Вхід
+            </Typography>
 
-            <TextField
-              name="password"
-              label="Password"
-              size="small"
-              type="password"
-              onChange={fieldChangeHandler}
-              value={formData.password}
-              error={formErrors?.password ? true : false}
-              helperText={formErrors?.password}
+            <Box
               sx={{
-                width: "100%",
-              }}
-            />
-          </Box>
-
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                mt: "25px",
-                width: "200px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+                mt: "10px",
               }}
             >
-              Sign In
-            </Button>
-          </Box>
-        </Box>
-      </form>
-
-      {reqError && (
-        <Snackbar
-          open={openNotify}
-          // autoHideDuration={5000}
-          onClose={handleCloseAlert}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "right",
-          }}
-        >
-          <Alert
-            severity="error"
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
+              <TextField
+                name="login"
+                label="Логін або email"
                 size="small"
-                onClick={() => {
-                  setOpenNotify(false);
-                  setReqError(null)
+                onChange={fieldChangeHandler}
+                value={formData.login}
+                error={formErrors?.login ? true : false}
+                helperText={formErrors?.login}
+                sx={{
+                  width: "100%",
+                }}
+              />
+
+              <TextField
+                name="password"
+                label="Пароль"
+                size="small"
+                type="password"
+                onChange={fieldChangeHandler}
+                value={formData.password}
+                error={formErrors?.password ? true : false}
+                helperText={formErrors?.password}
+                sx={{
+                  width: "100%",
+                }}
+              />
+
+              {reqError && (
+                <Typography
+                  sx={{
+                    color: "red",
+                  }}
+                  align="center"
+                >
+                  {reqError.data.message[0].toUpperCase() +
+                    reqError.data.message.slice(
+                      1,
+                      reqError.data.message.length
+                    )}
+                </Typography>
+              )}
+            </Box>
+
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  mt: "25px",
+                  width: "200px",
                 }}
               >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-          >
-            <AlertTitle>Error {reqError.status}</AlertTitle>
-            {reqError.data.message[0].toUpperCase() +
-              reqError.data.message.slice(1, reqError.data.message.length)}
-            {/* asdsadas */}
-          </Alert>
-        </Snackbar>
-      )}
+                Вхід
+              </Button>
+            </Box>
+          </Box>
+        </form>
+      </Box>
     </>
   );
 }

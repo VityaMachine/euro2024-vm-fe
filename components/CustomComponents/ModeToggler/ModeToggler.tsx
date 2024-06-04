@@ -25,7 +25,7 @@ export default function ModeToggler() {
       <Button onClick={toggleMode} variant="outlined">
         {theme.palette.mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         <Typography>
-          {theme.palette.mode === "light" ? "Dark mode" : "Light mode"}
+          {theme.palette.mode === "light" ? "Темна тема" : "Світла тема"}
         </Typography>
       </Button>
     </Box>

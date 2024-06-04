@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
@@ -9,14 +9,19 @@ import MenuItem from "@mui/material/MenuItem";
 import Tooltip from "@mui/material/Tooltip";
 
 import IconButton from "@mui/material/IconButton";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function MobileAuthMenu({
-  isAuthenticated,
+  authUser,
 }: {
-  isAuthenticated: boolean;
+  authUser: IAuthUser | null;
 }) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const { signOut } = useContext(AuthContext);
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -39,10 +44,18 @@ export default function MobileAuthMenu({
               sx={{
                 width: 32,
                 height: 32,
-                bgcolor: isAuthenticated ? "orange" : "red",
+                bgcolor: authUser ? "orange" : "red",
               }}
             >
-              {isAuthenticated ? "M" : "?"}
+              {authUser ? (
+                authUser.username[0].toUpperCase()
+              ) : (
+                <AccountCircleIcon
+                  sx={{
+                    color: "white",
+                  }}
+                />
+              )}
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -82,21 +95,28 @@ export default function MobileAuthMenu({
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {isAuthenticated ? (
+        {authUser ? (
           <Box>
             <MenuItem onClick={handleClose}>
-              <Link href={"/profile"}>Profile</Link>
+              <Link href={"/profile"}>Профіль</Link>
             </MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
+            <MenuItem
+              onClick={() => {
+                signOut();
+                handleClose();
+              }}
+            >
+              Вийти
+            </MenuItem>
           </Box>
         ) : (
           <Box>
             <MenuItem onClick={handleClose}>
-              <Link href={"/auth/sign-up"}>Sign-Up</Link>
+              <Link href={"/auth/sign-up"}>Реєстрація</Link>
             </MenuItem>
 
             <MenuItem onClick={handleClose}>
-              <Link href={"/auth/sign-in"}>Sing-in</Link>
+              <Link href={"/auth/sign-in"}>Логін</Link>
             </MenuItem>
           </Box>
         )}

@@ -1,5 +1,9 @@
+import ProtectedRoute from "@/components/ProtectedRoute/ProtectedRoute";
+
 export default function Profile() {
   return (
-    <div>Profile</div>
-  )
+    <ProtectedRoute>
+      <div>Profile</div>
+    </ProtectedRoute>
+  );
 }

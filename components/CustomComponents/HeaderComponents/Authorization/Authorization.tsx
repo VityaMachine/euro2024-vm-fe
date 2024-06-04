@@ -1,9 +1,16 @@
+'use client';
+
 import { Box } from "@mui/material";
 import MobileAuthMenu from "../../MobileAuthMenu/MobileAuthMenu";
 import DesktopAuthMenu from "../../DesktopAuthMenu/DesktopAuthMenu";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function Authorization() {
-  const isAuth = false;
+
+  const { user } = useContext(AuthContext)
+
+  
 
   return (
     <Box>
@@ -16,7 +23,7 @@ export default function Authorization() {
           },
         }}
       >
-        <MobileAuthMenu isAuthenticated={isAuth} />
+        <MobileAuthMenu authUser={user} />
       </Box>
 
       {/* desktop  */}
@@ -28,7 +35,7 @@ export default function Authorization() {
           },
         }}
       >
-        <DesktopAuthMenu isAuthenticated={isAuth} />
+        <DesktopAuthMenu authUser={user} />
       </Box>
     </Box>
   );

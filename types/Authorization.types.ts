@@ -48,7 +48,6 @@ interface ISignInError {
 interface IAuthContext {
   user: IAuthUser | null
   token: string;
-  getUser: (token: string) => void;
   signIn: (login: string, password: string) => any;
   signOut: () => void;
 }
