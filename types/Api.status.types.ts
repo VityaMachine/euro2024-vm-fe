@@ -1,0 +1,1 @@
+type ApiStatusType = 'idle' | 'pending' | 'resolved' | 'rejected'
