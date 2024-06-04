@@ -1,13 +1,8 @@
 "use client";
 
-import {
-  Box,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from "@mui/material";
+import { usePathname } from "next/navigation";
+
+import { Box, List, ListItemButton, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import ModeToggler from "../ModeToggler/ModeToggler";
 import Link from "next/link";
@@ -16,6 +11,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 
 export default function MenuContent() {
   const theme = useTheme();
+  const pathname = usePathname();
 
   return (
     <Box
@@ -39,54 +35,115 @@ export default function MenuContent() {
           mx: "15px",
         }}
       >
-        <Typography align="center">Головне меню</Typography>
+        <Typography
+          sx={{
+            fontWeight: 700,
+          }}
+          align="center"
+        >
+          Головне меню:
+        </Typography>
 
         <List component="nav">
-          <ListItemButton selected>
+          <ListItemButton selected={pathname.split("/")[1] === ""}>
             <Link
               href={"/"}
               className="flex justify-between items-center w-full"
             >
-              Головна
-
-              <CircleIcon
+              <Typography
                 sx={{
-                  width: "12px",
-                  height: "12px",
+                  color:
+                    theme.palette.mode === "light"
+                      ? pathname.split("/")[1] === ""
+                        ? "#1976D2"
+                        : "black"
+                      : "white",
                 }}
-              />
+              >
+                Головна
+              </Typography>
+              {pathname.split("/")[1] === "" && (
+                <CircleIcon
+                  sx={{
+                    width: "12px",
+                    height: "12px",
+                    color:
+                      theme.palette.mode === "light"
+                        ? pathname.split("/")[1] === ""
+                          ? "#1976D2"
+                          : "black"
+                        : "white",
+                  }}
+                />
+              )}
             </Link>
           </ListItemButton>
 
-          <ListItemButton >
+          <ListItemButton selected={pathname.split("/")[1] === "fixtures"}>
             <Link
               href={"/fixtures"}
               className="flex justify-between items-center w-full"
             >
-              Матчі
-
-              {/* <CircleIcon
+              <Typography
                 sx={{
-                  width: "12px",
-                  height: "12px",
+                  color:
+                    theme.palette.mode === "light"
+                      ? pathname.split("/")[1] === "fixtures"
+                        ? "#1976D2"
+                        : "black"
+                      : "white",
                 }}
-              /> */}
+              >
+                Матчі
+              </Typography>
+              {pathname.split("/")[1] === "fixtures" && (
+                <CircleIcon
+                  sx={{
+                    width: "12px",
+                    height: "12px",
+                    color:
+                      theme.palette.mode === "light"
+                        ? pathname.split("/")[1] === "fixtures"
+                          ? "#1976D2"
+                          : "black"
+                        : "white",
+                  }}
+                />
+              )}
             </Link>
           </ListItemButton>
 
-          <ListItemButton >
+          <ListItemButton selected={pathname.split("/")[1] === "standings"}>
             <Link
               href={"/standings"}
               className="flex justify-between items-center w-full"
             >
-              Результати
-
-              {/* <CircleIcon
+              <Typography
                 sx={{
-                  width: "12px",
-                  height: "12px",
+                  color:
+                    theme.palette.mode === "light"
+                      ? pathname.split("/")[1] === "standings"
+                        ? "#1976D2"
+                        : "black"
+                      : "white",
                 }}
-              /> */}
+              >
+                Результати
+              </Typography>
+              {pathname.split("/")[1] === "standings" && (
+                <CircleIcon
+                  sx={{
+                    width: "12px",
+                    height: "12px",
+                    color:
+                      theme.palette.mode === "light"
+                        ? pathname.split("/")[1] === "standings"
+                          ? "#1976D2"
+                          : "black"
+                        : "white",
+                  }}
+                />
+              )}
             </Link>
           </ListItemButton>
         </List>

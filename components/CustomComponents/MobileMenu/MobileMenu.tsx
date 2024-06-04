@@ -63,7 +63,7 @@ export default function MobileMenu() {
                 justifyContent: "space-between",
               }}
             >
-              <Typography color="#fff">Main menu</Typography>
+              <Typography color="#fff">Меню</Typography>
 
               <IconButton onClick={toggleOpen}>
                 <HighlightOffIcon

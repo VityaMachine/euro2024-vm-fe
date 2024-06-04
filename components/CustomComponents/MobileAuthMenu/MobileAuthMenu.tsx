@@ -116,7 +116,7 @@ export default function MobileAuthMenu({
             </MenuItem>
 
             <MenuItem onClick={handleClose}>
-              <Link href={"/auth/sign-in"}>Логін</Link>
+              <Link href={"/auth/sign-in"}>Вхід</Link>
             </MenuItem>
           </Box>
         )}

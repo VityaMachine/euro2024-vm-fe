@@ -44,7 +44,7 @@ export default function DesktopAuthMenu({
             className="underline hover:underline-offset-4"
             href={"/auth/sign-in"}
           >
-            Логін
+            Вхід
           </Link>{" "}
           /{" "}
           <Link

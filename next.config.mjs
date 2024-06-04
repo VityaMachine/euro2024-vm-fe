@@ -8,6 +8,9 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    BE_HOST: "http://localhost:80"
+  }
 };
 
 export default nextConfig;
