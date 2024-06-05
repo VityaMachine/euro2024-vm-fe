@@ -78,7 +78,7 @@ export default function SignUpForm() {
   return (
     <>
       {!signUpSuccess ? (
-        <form onSubmit={formSubmitHandler}>
+        <>
           <Typography
             variant="h5"
             align="center"
@@ -88,197 +88,203 @@ export default function SignUpForm() {
           >
             Вас вітає портал VM-EURO 2024. Для реєстрації заповніть форму
           </Typography>
-
-          <Box
-            sx={{
-              maxWidth: {
-                xs: "210px",
-                sm: "430px",
-              },
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <Typography align="center" variant="h6">
-              Реєстрація
-            </Typography>
-
+          <form onSubmit={formSubmitHandler}>
             <Box
               sx={{
-                display: "flex",
-                flexDirection: {
-                  xs: "column",
-                  sm: "row",
+                maxWidth: {
+                  xs: "210px",
+                  sm: "430px",
                 },
-                width: "100%",
-                justifyContent: "space-between",
-                gap: "10px",
-                mt: "20px",
+                display: "flex",
+                flexDirection: "column",
               }}
             >
-              <TextField
-                name="firstName"
-                label="Ім'я"
-                size="small"
-                onChange={fieldChangeHandler}
-                value={formData.firstName}
-                error={formErrors?.firstName ? true : false}
-                helperText={formErrors?.firstName}
+              <Typography align="center" variant="h6">
+                Реєстрація
+              </Typography>
+
+              <Box
                 sx={{
+                  display: "flex",
+                  flexDirection: {
+                    xs: "column",
+                    sm: "row",
+                  },
                   width: "100%",
+                  justifyContent: "space-between",
+                  gap: "10px",
+                  mt: "20px",
                 }}
-              />
+              >
+                <TextField
+                  name="firstName"
+                  label="Ім'я"
+                  size="small"
+                  onChange={fieldChangeHandler}
+                  value={formData.firstName}
+                  error={formErrors?.firstName ? true : false}
+                  helperText={formErrors?.firstName}
+                  sx={{
+                    width: "100%",
+                  }}
+                />
 
-              <TextField
-                name="lastName"
-                label="Прізвище"
-                size="small"
-                onChange={fieldChangeHandler}
-                value={formData.lastName}
-                error={formErrors?.lastName ? true : false}
-                helperText={formErrors?.lastName}
+                <TextField
+                  name="lastName"
+                  label="Прізвище"
+                  size="small"
+                  onChange={fieldChangeHandler}
+                  value={formData.lastName}
+                  error={formErrors?.lastName ? true : false}
+                  helperText={formErrors?.lastName}
+                  sx={{
+                    width: "100%",
+                  }}
+                />
+              </Box>
+
+              <Box
                 sx={{
-                  width: "100%",
-                }}
-              />
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: {
-                  xs: "column",
-                  sm: "row",
-                },
-                gap: "10px",
-                mt: "10px",
-              }}
-            >
-              <TextField
-                name="userName"
-                label="Логін"
-                size="small"
-                onChange={fieldChangeHandler}
-                value={formData.userName}
-                error={formErrors?.userName ? true : false}
-                helperText={formErrors?.userName}
-                sx={{
-                  width: "100%",
-                }}
-              />
-
-              <TextField
-                name="birthDate"
-                size="small"
-                type="date"
-                onChange={fieldChangeHandler}
-                value={formData.birthDate}
-                error={formErrors?.birthDate ? true : false}
-                helperText={
-                  formErrors?.birthDate
-                    ? formErrors.birthDate
-                    : "Введіть дату народження"
-                }
-                sx={{
-                  width: "100%",
-                }}
-              />
-            </Box>
-
-            <TextField
-              name="email"
-              label="Email"
-              size="small"
-              type="email"
-              onChange={fieldChangeHandler}
-              value={formData.email}
-              error={formErrors?.email ? true : false}
-              helperText={formErrors?.email}
-              sx={{
-                width: "100%",
-                mt: {
-                  xs: "10px",
-                  sm: 0,
-                },
-              }}
-            />
-
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: {
-                  xs: "column",
-                  sm: "row",
-                },
-                gap: "10px",
-                mt: "10px",
-              }}
-            >
-              <TextField
-                name="password"
-                label="Пароль"
-                size="small"
-                type="password"
-                onChange={fieldChangeHandler}
-                value={formData.password}
-                error={formErrors?.password ? true : false}
-                helperText={formErrors?.password}
-                sx={{
-                  width: "100%",
-                }}
-              />
-
-              <TextField
-                name="rePassword"
-                label="Повторіть пароль"
-                size="small"
-                type="password"
-                onChange={fieldChangeHandler}
-                value={formData.rePassword}
-                error={formErrors?.rePassword ? true : false}
-                helperText={formErrors?.rePassword}
-                sx={{
-                  width: "100%",
-                }}
-              />
-            </Box>
-
-            {reqError && (
-              <Typography
-                sx={{
-                  color: "red",
+                  display: "flex",
+                  flexDirection: {
+                    xs: "column",
+                    sm: "row",
+                  },
+                  gap: "10px",
                   mt: "10px",
                 }}
-                align="center"
               >
-                {reqError.data.message[0].toUpperCase() +
-                  reqError.data.message.slice(1, reqError.data.message.length)}
-              </Typography>
-            )}
+                <TextField
+                  name="userName"
+                  label="Логін"
+                  size="small"
+                  onChange={fieldChangeHandler}
+                  value={formData.userName}
+                  error={formErrors?.userName ? true : false}
+                  helperText={formErrors?.userName}
+                  sx={{
+                    width: "100%",
+                  }}
+                />
 
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Button
-                type="submit"
-                variant="contained"
+                <TextField
+                  name="birthDate"
+                  size="small"
+                  type="date"
+                  onChange={fieldChangeHandler}
+                  value={formData.birthDate}
+                  error={formErrors?.birthDate ? true : false}
+                  helperText={
+                    formErrors?.birthDate
+                      ? formErrors.birthDate
+                      : "Введіть дату народження"
+                  }
+                  sx={{
+                    width: "100%",
+                  }}
+                />
+              </Box>
+
+              <TextField
+                name="email"
+                label="Email"
+                size="small"
+                type="email"
+                onChange={fieldChangeHandler}
+                value={formData.email}
+                error={formErrors?.email ? true : false}
+                helperText={formErrors?.email}
                 sx={{
-                  mt: "25px",
-                  width: "200px",
+                  width: "100%",
+                  mt: {
+                    xs: "10px",
+                    sm: 0,
+                  },
+                }}
+              />
+
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: {
+                    xs: "column",
+                    sm: "row",
+                  },
+                  gap: "10px",
+                  mt: "10px",
                 }}
               >
-                Sign Up
-              </Button>
+                <TextField
+                  name="password"
+                  label="Пароль"
+                  size="small"
+                  type="password"
+                  onChange={fieldChangeHandler}
+                  value={formData.password}
+                  error={formErrors?.password ? true : false}
+                  helperText={formErrors?.password}
+                  sx={{
+                    width: "100%",
+                  }}
+                />
+
+                <TextField
+                  name="rePassword"
+                  label="Повторіть пароль"
+                  size="small"
+                  type="password"
+                  onChange={fieldChangeHandler}
+                  value={formData.rePassword}
+                  error={formErrors?.rePassword ? true : false}
+                  helperText={formErrors?.rePassword}
+                  sx={{
+                    width: "100%",
+                  }}
+                />
+              </Box>
+
+              {reqError && (
+                <Typography
+                  sx={{
+                    color: "red",
+                    mt: "10px",
+                  }}
+                  align="center"
+                >
+                  {reqError.data.message[0].toUpperCase() +
+                    reqError.data.message.slice(
+                      1,
+                      reqError.data.message.length
+                    )}
+                </Typography>
+              )}
+
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
+                    mt: "25px",
+                    width: "200px",
+                  }}
+                >
+                  Sign Up
+                </Button>
+              </Box>
             </Box>
-          </Box>
-        </form>
+          </form>
+        </>
       ) : (
-        <Box sx={{
-          mt: '40px'
-        }}>
+        <Box
+          sx={{
+            mt: "40px",
+          }}
+        >
           <Typography>
             Шановний {formData.userName}, Ваш аккаунт успішно зареєстрований.
             Для активації аккаутну та подальшого входу, будь-ласка активуйте

@@ -103,7 +103,7 @@ export default function FixturesPage() {
                 labelId="round-select-label"
                 id="round-select"
                 value={selectedRound}
-                label="Age"
+                label="Раунд"
                 onChange={handleSelectRound}
               >
                 {rounds?.map((item) => (

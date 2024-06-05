@@ -11,18 +11,28 @@ export default function MatchesList({
   fixtures: IFixtureData[];
   selectedRound: string;
 }) {
-  const fixturesToShow = fixtures.filter(
-    (fixture) => fixture.round === selectedRound
-  );
+  const fixturesToShow = fixtures
+    .filter((fixture) => fixture.round === selectedRound)
+    .sort((a, b) => {
+      const dateA = new Date(a.dateTime).getTime();
+      const dateB = new Date(b.dateTime).getTime();
+
+      return dateA - dateB;
+    });
+
+
+    
 
   return (
     <Box>
       <Typography align="center">
         Перелік матчів стадії <strong>{selectedRound}</strong>
       </Typography>
-      <Box sx={{
-        mt: '20px'
-      }}>
+      <Box
+        sx={{
+          mt: "20px",
+        }}
+      >
         <List>
           {fixturesToShow.map((item) => (
             <ListItem key={item.fixtureId}>
@@ -55,7 +65,7 @@ export default function MatchesList({
                     },
                   }}
                 >
-                  {item.date_text.slice(0, 10).split("-").reverse().join(".")}
+                {item.date_text.slice(0, 10).split("-").reverse().join(".")}
                 </Typography>
 
                 <Typography
@@ -90,7 +100,7 @@ export default function MatchesList({
                     },
                   }}
                 >
-                  {item.homeTeamNameOriginal}
+                  {item.homeTeamNameOriginal.split(" ")[0]}
                 </Typography>
 
                 <Typography
@@ -103,7 +113,11 @@ export default function MatchesList({
                     },
                   }}
                 >
-                  {item.homeTeamNameOriginal=== 'Slovakia' ? "SLK" : item.homeTeamNameOriginal.slice(0, 3).toUpperCase()}
+                  {item.homeTeamNameOriginal === "Slovakia"
+                    ? "SVK"
+                    : item.homeTeamNameOriginal === "Slovenia"
+                    ? "SVN"
+                    : item.homeTeamNameOriginal.slice(0, 3).toUpperCase()}
                 </Typography>
 
                 <Image
@@ -160,7 +174,7 @@ export default function MatchesList({
                     },
                   }}
                 >
-                  {item.awayTeamNameOriginal}
+                  {item.awayTeamNameOriginal.split(" ")[0]}
                 </Typography>
 
                 <Typography
@@ -173,7 +187,11 @@ export default function MatchesList({
                     },
                   }}
                 >
-                  {item.awayTeamNameOriginal === 'Slovakia' ? "SLK" : item.awayTeamNameOriginal.slice(0, 3).toUpperCase()}
+                  {item.awayTeamNameOriginal === "Slovakia"
+                    ? "SVK"
+                    : item.awayTeamNameOriginal === "Slovenia"
+                    ? "SVN"
+                    : item.awayTeamNameOriginal.slice(0, 3).toUpperCase()}
                 </Typography>
               </Box>
             </ListItem>
