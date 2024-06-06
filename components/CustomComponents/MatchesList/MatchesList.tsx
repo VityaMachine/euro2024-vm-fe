@@ -9,28 +9,29 @@ export default function MatchesList({
   selectedRound,
 }: {
   fixtures: IFixtureData[];
-  selectedRound: string;
+  selectedRound?: string;
 }) {
-  const fixturesToShow = fixtures
-    .filter((fixture) => fixture.round === selectedRound)
-    .sort((a, b) => {
-      const dateA = new Date(a.dateTime).getTime();
-      const dateB = new Date(b.dateTime).getTime();
+  const fixturesToShow = selectedRound
+    ? fixtures
+        .filter((fixture) => fixture.round === selectedRound)
+        .sort((a, b) => {
+          const dateA = new Date(a.dateTime).getTime();
+          const dateB = new Date(b.dateTime).getTime();
 
-      return dateA - dateB;
-    });
-
-
-    
+          return dateA - dateB;
+        })
+    : fixtures;
 
   return (
     <Box>
-      <Typography align="center">
-        Перелік матчів стадії <strong>{selectedRound}</strong>
-      </Typography>
+      {selectedRound && (
+        <Typography align="center">
+          Перелік матчів стадії <strong>{selectedRound}</strong>
+        </Typography>
+      )}
       <Box
         sx={{
-          mt: "20px",
+          my: "10px",
         }}
       >
         <List>
@@ -65,7 +66,7 @@ export default function MatchesList({
                     },
                   }}
                 >
-                {item.date_text.slice(0, 10).split("-").reverse().join(".")}
+                  {item.date_text.slice(0, 10).split("-").reverse().join(".")}
                 </Typography>
 
                 <Typography
