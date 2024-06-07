@@ -21,36 +21,36 @@ export default function FixturesPage() {
   const [selectedRound, setSelectedRound] = useState<string>("");
   const [status, setStatus] = useState<ApiStatusType>("rejected");
 
-  // useEffect(() => {
-  //   const getFixtures = async () => {
-  //     try {
-  //       setStatus("pending");
+  useEffect(() => {
+    const getFixtures = async () => {
+      try {
+        setStatus("pending");
 
-  //       const fixtDataResp = await axios.get(
-  //         `${process.env.NEXT_PUBLIC_BE_HOST}/fixtures/all`
-  //       );
+        const fixtDataResp = await axios.get(
+          `${process.env.NEXT_PUBLIC_BE_HOST}/fixtures/all`
+        );
 
-  //       if (fixtDataResp.status === 200) {
-  //         const fixtData = fixtDataResp.data as IFixtureData[];
+        if (fixtDataResp.status === 200) {
+          const fixtData = fixtDataResp.data as IFixtureData[];
 
-  //         setFixtures(fixtData);
+          setFixtures(fixtData);
 
-  //         const rounds = fixtData
-  //           .map((item) => item.round)
-  //           .filter((item, i, ar) => ar.indexOf(item) === i);
+          const rounds = fixtData
+            .map((item) => item.round)
+            .filter((item, i, ar) => ar.indexOf(item) === i);
 
-  //         setRounds(rounds);
-  //         setSelectedRound(rounds[0]);
-  //         setStatus("resolved");
-  //       }
-  //     } catch (error) {
-  //       setStatus("rejected");
-  //       console.log(error);
-  //     }
-  //   };
+          setRounds(rounds);
+          setSelectedRound(rounds[0]);
+          setStatus("resolved");
+        }
+      } catch (error) {
+        setStatus("rejected");
+        console.log(error);
+      }
+    };
 
-  //   getFixtures();
-  // }, []);
+    getFixtures();
+  }, []);
 
   const handleSelectRound = (e: SelectChangeEvent) => {
     setSelectedRound(e.target.value);
