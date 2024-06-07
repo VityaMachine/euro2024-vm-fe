@@ -37,7 +37,7 @@ export default function AuthProvider({
       }
 
       try {
-        const userReqResult = await axios.get(`${process.env.BE_HOST}/users`, {
+        const userReqResult = await axios.get(`${process.env.NEXT_PUBLIC_BE_HOST}/users`, {
           headers: {
             Authorization: `Bearer ${savedToken}`,
           },
@@ -62,7 +62,7 @@ export default function AuthProvider({
 
     try {
       const resSignInData = await axios.post(
-        `${process.env.BE_HOST}/auth/sign-in`,
+        `${process.env.NEXT_PUBLIC_BE_HOST}/auth/sign-in`,
         signInData
       );
 
@@ -82,7 +82,7 @@ export default function AuthProvider({
   const signOut = async () => {
     try {
       const signOutResult = await axios.patch(
-        `${process.env.BE_HOST}/auth/logout`,
+        `${process.env.NEXT_PUBLIC_BE_HOST}/auth/logout`,
         undefined,
         {
           headers: {

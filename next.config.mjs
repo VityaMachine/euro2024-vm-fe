@@ -8,9 +8,6 @@ const nextConfig = {
       },
     ],
   },
-  env: {
-    BE_HOST: "https://euro2024-vm-be.onrender.com"
-  }
 };
 
 export default nextConfig;

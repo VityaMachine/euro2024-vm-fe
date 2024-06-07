@@ -27,7 +27,7 @@ export default function FixturesPage() {
         setStatus("pending");
 
         const fixtDataResp = await axios.get(
-          `${process.env.BE_HOST}/fixtures/all`
+          `${process.env.NEXT_PUBLIC_BE_HOST}/fixtures/all`
         );
 
         if (fixtDataResp.status === 200) {
@@ -55,6 +55,11 @@ export default function FixturesPage() {
   const handleSelectRound = (e: SelectChangeEvent) => {
     setSelectedRound(e.target.value);
   };
+
+
+  console.log(process.env.NEXT_PUBLIC_BE_HOST);
+  
+
 
   return (
     <Box

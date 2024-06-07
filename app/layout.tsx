@@ -23,6 +23,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+
   return (
     <html lang="uk">
       <body cz-shortcut-listen="true" className={roboto.className}>

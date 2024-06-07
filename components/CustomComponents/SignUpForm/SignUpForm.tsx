@@ -63,7 +63,7 @@ export default function SignUpForm() {
 
     try {
       const resp = await axios.post(
-        `${process.env.BE_HOST}/auth/sign-up`,
+        `${process.env.NEXT_PUBLIC_BE_HOST}/auth/sign-up`,
         reqData
       );
 

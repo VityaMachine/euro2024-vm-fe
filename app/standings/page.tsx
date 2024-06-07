@@ -34,7 +34,7 @@ export default function StandingsPage() {
     const getStandingsData = async () => {
       try {
         const standingsRespData = await axios.get(
-          `${process.env.BE_HOST}/standings`
+          `${process.env.NEXT_PUBLIC_BE_HOST}/standings`
         );
 
         if (standingsRespData.status === 200) {

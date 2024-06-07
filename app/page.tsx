@@ -26,7 +26,7 @@ export default function MainPage() {
         setStatus("pending");
 
         const fixtDataResp = await axios.get(
-          `${process.env.BE_HOST}/fixtures/all`
+          `${process.env.NEXT_PUBLIC_BE_HOST}/fixtures/all`
         );
 
         if (fixtDataResp.status === 200) {

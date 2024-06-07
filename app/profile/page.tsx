@@ -19,6 +19,8 @@ export default function Profile() {
     setDataType(newValue);
   };
 
+
+  
   return (
     <ProtectedRoute>
       <Box
