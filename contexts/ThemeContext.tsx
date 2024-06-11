@@ -1,5 +1,5 @@
 "use client";
-import { createTheme } from "@mui/material/styles";
+import { createTheme, experimental_sx as sx } from "@mui/material/styles";
 
 import React, { createContext, useEffect, useState } from "react";
 
@@ -48,6 +48,7 @@ export default function ThemeProvider({
         xl: 1536,
       },
     },
+
   });
 
   useEffect(() => {

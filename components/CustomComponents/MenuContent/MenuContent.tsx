@@ -8,10 +8,14 @@ import ModeToggler from "../ModeToggler/ModeToggler";
 import Link from "next/link";
 
 import CircleIcon from "@mui/icons-material/Circle";
+import { useContext } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
 
 export default function MenuContent() {
   const theme = useTheme();
   const pathname = usePathname();
+
+  const { user } = useContext(AuthContext);
 
   return (
     <Box
@@ -128,7 +132,7 @@ export default function MenuContent() {
                       : "white",
                 }}
               >
-                Результати
+                Групи
               </Typography>
               {pathname.split("/")[1] === "standings" && (
                 <CircleIcon
@@ -146,6 +150,49 @@ export default function MenuContent() {
               )}
             </Link>
           </ListItemButton>
+
+          {user && (
+            <ListItemButton
+              sx={{
+                border: "2px solid red",
+              }}
+              selected={pathname.split("/")[1] === "predictions"}
+            >
+              <Link
+                href={"/predictions"}
+                className="flex justify-between items-center w-full"
+              >
+                <Typography
+                  sx={{
+                    color:
+                      theme.palette.mode === "light"
+                        ? pathname.split("/")[1] === "predictions"
+                          ? "#1976D2"
+                          : "black"
+                        : "white",
+
+                    fontWeight: 700,
+                  }}
+                >
+                  Прогнози
+                </Typography>
+                {pathname.split("/")[1] === "predictions" && (
+                  <CircleIcon
+                    sx={{
+                      width: "12px",
+                      height: "12px",
+                      color:
+                        theme.palette.mode === "light"
+                          ? pathname.split("/")[1] === "predictions"
+                            ? "#1976D2"
+                            : "black"
+                          : "white",
+                    }}
+                  />
+                )}
+              </Link>
+            </ListItemButton>
+          )}
         </List>
       </Box>
     </Box>

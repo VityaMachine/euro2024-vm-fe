@@ -1,29 +1,23 @@
-type shortMatchStatusType =
-  | "NS"
-  | "FT"
-  | "CANC"
-  | "TBD"
-  | "1H"
-  | "2H"
-  | "HT"
-  | "PST";
+interface IPredictFixtureData {
+  id: string;
+  userId: string;
+  fixtureId: number;
+  awayTeamGoals: number;
+  homeTeamGoals: number;
+  createdAt: string;
+  updatedAt: string;
+  predictionResult: {
+    points?: number,
+    text: string
+  }
+}
 
-type resultMatchType = "W" | "D" | "L" | null;
-
-interface IFixtureData {
+interface IPredictionsData {
   fixtureId: number;
   date_text: string;
   dateTime: Date | any;
-  referee: string;
-  statusLong: string;
   statusShort: shortMatchStatusType;
-  city: string;
-  stadiumName: string;
-  stadiumId: number;
   round: string;
-  leagueId: number;
-  leagueName: string;
-
   online: {
     elapsedTime: number;
     goalsHome: number;
@@ -33,14 +27,14 @@ interface IFixtureData {
   homeTeamNameOriginal: string;
   homeTeamId: number;
   homeTeamLogo: string;
-  homeTeamGoalsHT: number | null;
   homeTeamGoalsFT: number | null;
   homeTeamResult: resultMatchType;
 
   awayTeamNameOriginal: string;
   awayTeamId: number;
   awayTeamLogo: string;
-  awayTeamGoalsHT: number | null;
   awayTeamGoalsFT: number | null;
   awayTeamResult: resultMatchType;
+
+  prediction: IPredictFixtureData | null;
 }

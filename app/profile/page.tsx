@@ -40,7 +40,10 @@ export default function Profile() {
           Сторінка профілю
         </Typography>
 
-        <TabContext value={dataType}>
+        <PersonalInfo />
+
+
+        {/* <TabContext value={dataType}>
           <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <TabList onChange={handleDataTypeChange}>
               <Tab label="Загальне" value="general" />
@@ -51,7 +54,7 @@ export default function Profile() {
             <PersonalInfo />
           </TabPanel>
           <TabPanel value="bets">Bets info</TabPanel>
-        </TabContext>
+        </TabContext> */}
       </Box>
     </ProtectedRoute>
   );

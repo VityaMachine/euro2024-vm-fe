@@ -19,7 +19,7 @@ export default function FixturesPage() {
   const [fixtures, setFixtures] = useState<null | IFixtureData[]>(null);
   const [rounds, setRounds] = useState<null | string[]>(null);
   const [selectedRound, setSelectedRound] = useState<string>("");
-  const [status, setStatus] = useState<ApiStatusType>("rejected");
+  const [status, setStatus] = useState<ApiStatusType>("idle");
 
   useEffect(() => {
     const getFixtures = async () => {
@@ -36,7 +36,11 @@ export default function FixturesPage() {
           setFixtures(fixtData);
 
           const rounds = fixtData
-            .map((item) => item.round)
+            .map((item) =>
+              item.round.includes("Group")
+                ? `Group round ${item.round[item.round.length - 1]}`
+                : item.round
+            )
             .filter((item, i, ar) => ar.indexOf(item) === i);
 
           setRounds(rounds);
@@ -55,11 +59,6 @@ export default function FixturesPage() {
   const handleSelectRound = (e: SelectChangeEvent) => {
     setSelectedRound(e.target.value);
   };
-
-
-  console.log(process.env);
-  
-
 
   return (
     <Box
@@ -123,8 +122,8 @@ export default function FixturesPage() {
           <Box
             sx={{
               mt: "20px",
-              display: 'flex',
-              justifyContent: 'center'
+              display: "flex",
+              justifyContent: "center",
             }}
           >
             {fixtures && (

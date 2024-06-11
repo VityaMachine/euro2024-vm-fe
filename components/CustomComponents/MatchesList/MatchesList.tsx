@@ -13,7 +13,11 @@ export default function MatchesList({
 }) {
   const fixturesToShow = selectedRound
     ? fixtures
-        .filter((fixture) => fixture.round === selectedRound)
+        .filter((fixture) =>
+          fixture.round.includes("Group")
+            ? fixture.round.includes(selectedRound[selectedRound.length - 1])
+            : fixture.round === selectedRound
+        )
         .sort((a, b) => {
           const dateA = new Date(a.dateTime).getTime();
           const dateB = new Date(b.dateTime).getTime();
@@ -54,6 +58,10 @@ export default function MatchesList({
                     xs: "55px",
                     sm: "110px",
                   },
+                  marginRight: {
+                    xs: "30px",
+                    sm: "10px",
+                  },
                   // overflow: 'hidden'
                 }}
               >
@@ -86,7 +94,10 @@ export default function MatchesList({
               <Box
                 sx={{
                   display: "flex",
-                  minWidth: "140px",
+                  minWidth: {
+                    xs: "60px",
+                    sm: "120px",
+                  },
                   alignItems: "center",
                   justifyContent: "flex-end",
                 }}
@@ -137,7 +148,7 @@ export default function MatchesList({
                   justifyContent: "center",
                   alignItems: "center",
                   mx: "15px",
-                  minWidth: "25px",
+                  minWidth: "32px",
                   color: item.online ? red[700] : "none",
                 }}
               >
@@ -152,7 +163,10 @@ export default function MatchesList({
               <Box
                 sx={{
                   display: "flex",
-                  minWidth: "140px",
+                  minWidth: {
+                    xs: "60px",
+                    sm: "120px",
+                  },
                   alignItems: "center",
                   justifyContent: "flex-start",
                 }}

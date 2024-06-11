@@ -1,0 +1,1 @@
+NEXT_PUBLIC_BE_HOST=https://euro2024-vm-be.onrender.com

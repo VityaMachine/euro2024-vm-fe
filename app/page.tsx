@@ -65,8 +65,6 @@ export default function MainPage() {
     getFixtures();
   }, []);
 
-  console.log(process.env);
-
   return (
     <Box
       sx={{
