@@ -167,7 +167,7 @@ export default function PredictionTable() {
                       {item.userName}
                     </Typography>
                     <Typography
-                      align="center"
+                      align="left"
                       sx={{
                         width: "150px",
                         display: {
@@ -180,7 +180,7 @@ export default function PredictionTable() {
                       {item.userFirstName}&nbsp;{item.userLastName}
                     </Typography>
                     <Typography
-                      align="center"
+                      align="left"
                       sx={{ width: "25px", fontSize: "14px" }}
                     >
                       {item.userPredData.exactScore}
