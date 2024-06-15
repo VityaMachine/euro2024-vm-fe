@@ -144,7 +144,7 @@ export default function PreditctionListItem({
         sx={{
           display: "flex",
           minWidth: {
-            xs: "60px",
+            xs: "50px",
             sm: "120px",
           },
           alignItems: "center",
@@ -172,6 +172,10 @@ export default function PreditctionListItem({
               xs: "block",
               sm: "none",
             },
+            fontSize: {
+              xs: '12px',
+              sm: '14px',
+            }
           }}
         >
           {preditionItem.homeTeamNameOriginal === "Slovakia"
@@ -216,24 +220,6 @@ export default function PreditctionListItem({
               {preditionItem.prediction.awayTeamGoals}
             </Typography>
 
-            {/* <Input
-              value={preditionItem.prediction.homeTeamGoals}
-              readOnly
-              disableUnderline
-              sx={{
-                width: "10px",
-              }}
-            />
-            &nbsp;:&nbsp;
-            <Input
-              value={preditionItem.prediction.awayTeamGoals}
-              readOnly
-              disableUnderline
-              sx={{
-                width: "10px",
-                color: "#000",
-              }}
-            /> */}
           </Box>
         ) : (
           <Box
@@ -272,7 +258,7 @@ export default function PreditctionListItem({
         sx={{
           display: "flex",
           minWidth: {
-            xs: "60px",
+            xs: "50px",
             sm: "120px",
           },
           alignItems: "center",
@@ -295,6 +281,7 @@ export default function PreditctionListItem({
               xs: "none",
               sm: "block",
             },
+
           }}
         >
           {preditionItem.awayTeamNameOriginal.split(" ")[0]}
@@ -308,6 +295,10 @@ export default function PreditctionListItem({
               xs: "block",
               sm: "none",
             },
+            fontSize: {
+              xs: '12px',
+              sm: '14px',
+            }
           }}
         >
           {preditionItem.awayTeamNameOriginal === "Slovakia"
@@ -322,14 +313,22 @@ export default function PreditctionListItem({
       <Box
         sx={{
           marginLeft: "10px",
-          width: "140px",
+          width: {
+            xs: '110px',
+            sm: '140px'
+          },
         }}
       >
         {preditionItem.prediction ? (
           <Box>
             {preditionItem.statusShort === "NS" ||
             preditionItem.statusShort === "TBD" ? (
-              <Typography variant="body2">матч не розпочався</Typography>
+              <Typography variant="body2" sx={{
+                fontSize: {
+                  xs: "12px",
+                  sm: '14px'
+                }
+              }}>матч не розпочався</Typography>
             ) : //   <Box
             //     sx={{
             //       display: "flex",
@@ -345,7 +344,12 @@ export default function PreditctionListItem({
             preditionItem.statusShort === "1H" ||
               preditionItem.statusShort === "2H" ||
               preditionItem.statusShort === "HT" ? (
-              <Typography variant="body2">матч в процесі</Typography>
+              <Typography variant="body2" sx={{
+                fontSize: {
+                  xs: "12px",
+                  sm: '14px'
+                }
+              }}>матч в процесі</Typography>
             ) : (
               <Box
                 sx={{
@@ -353,11 +357,21 @@ export default function PreditctionListItem({
                   flexDirection: "column",
                 }}
               >
-                <Typography variant="body2">
+                <Typography variant="body2" sx={{
+                  fontSize: {
+                    xs: "12px",
+                    sm: '14px'
+                  }
+                }}>
                   Рахунок: {preditionItem.homeTeamGoalsFT}:
                   {preditionItem.awayTeamGoalsFT}
                 </Typography>
-                <Typography variant="body2">
+                <Typography variant="body2" sx={{
+                  fontSize: {
+                    xs: "12px",
+                    sm: '14px'
+                  }
+                }}>
                   Результат:{" "}
                   {preditionItem.prediction.predictionResult.points
                     ? preditionItem.prediction.predictionResult.points
@@ -368,7 +382,12 @@ export default function PreditctionListItem({
             )}
           </Box>
         ) : ["1H", "2H", "HT", "FT"].includes(preditionItem.statusShort) ? (
-          <Typography variant="body2">Ставка більше недоступна</Typography>
+          <Typography variant="body2" sx={{
+            fontSize: {
+              xs: "12px",
+              sm: '14px'
+            }
+          }}>Ставка більше недоступна</Typography>
         ) : (
           <Box
             sx={{
@@ -392,7 +411,12 @@ export default function PreditctionListItem({
               <Button
                 size="small"
                 variant="contained"
-                sx={{}}
+                sx={{
+                  fontSize: {
+                    xs: '11px',
+                    sm: '13px'
+                  }
+                }}
                 onClick={onMakePrediction}
               >
                 Підтвердити
