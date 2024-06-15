@@ -28,10 +28,7 @@ export default function MobileMenu() {
     >
       <Box
         sx={{
-          width: {
-            xs: "170px",
-            sm: "190px",
-          },
+          width: "190px"
         }}
       >
         {/* Title */}

@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 
 import { Box, List, ListItemButton, Typography } from "@mui/material";
+import TelegramIcon from "@mui/icons-material/Telegram";
+
 import { useTheme } from "@mui/material/styles";
 import ModeToggler from "../ModeToggler/ModeToggler";
 import Link from "next/link";
@@ -152,46 +154,60 @@ export default function MenuContent() {
           </ListItemButton>
 
           {user && (
-            <ListItemButton
-              sx={{
-                border: "2px solid red",
-              }}
-              selected={pathname.split("/")[1] === "predictions"}
-            >
-              <Link
-                href={"/predictions"}
-                className="flex justify-between items-center w-full"
+            <>
+              <ListItemButton
+                sx={{
+                  border: "2px solid red",
+                }}
+                selected={pathname.split("/")[1] === "predictions"}
               >
-                <Typography
-                  sx={{
-                    color:
-                      theme.palette.mode === "light"
-                        ? pathname.split("/")[1] === "predictions"
-                          ? "#1976D2"
-                          : "black"
-                        : "white",
-
-                    fontWeight: 700,
-                  }}
+                <Link
+                  href={"/predictions"}
+                  className="flex justify-between items-center w-full"
                 >
-                  Прогнози
-                </Typography>
-                {pathname.split("/")[1] === "predictions" && (
-                  <CircleIcon
+                  <Typography
                     sx={{
-                      width: "12px",
-                      height: "12px",
                       color:
                         theme.palette.mode === "light"
                           ? pathname.split("/")[1] === "predictions"
                             ? "#1976D2"
                             : "black"
                           : "white",
+
+                      fontWeight: 700,
+                    }}
+                  >
+                    Прогнози
+                  </Typography>
+                  {pathname.split("/")[1] === "predictions" && (
+                    <CircleIcon
+                      sx={{
+                        width: "12px",
+                        height: "12px",
+                        color:
+                          theme.palette.mode === "light"
+                            ? pathname.split("/")[1] === "predictions"
+                              ? "#1976D2"
+                              : "black"
+                            : "white",
+                      }}
+                    />
+                  )}
+                </Link>
+              </ListItemButton>
+              <ListItemButton sx={{
+                fontSize: '14px'
+              }}>
+                <Link href={"https://t.me/+4Qtifh2AS6xjNDMy"}>
+                  Чат телеграм&nbsp;
+                  <TelegramIcon
+                    sx={{
+                      fill: "#30A4DA",
                     }}
                   />
-                )}
-              </Link>
-            </ListItemButton>
+                </Link>
+              </ListItemButton>
+            </>
           )}
         </List>
       </Box>
