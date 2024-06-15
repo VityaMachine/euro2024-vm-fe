@@ -207,11 +207,7 @@ export default function GroupsTables({
                           ? team.all.goals.for - team.all.goals.against
                           : 0}
                       </TableCell>
-                      <TableCell align="center">
-                        {team.all.win && team.all.draw
-                          ? team.all.win * 3 + team.all.draw
-                          : 0}
-                      </TableCell>
+                      <TableCell align="center">{team.points}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -324,11 +320,7 @@ export default function GroupsTables({
                       <TableCell align="center">
                         {team.all.goals.for}/{team.all.goals.against}
                       </TableCell>
-                      <TableCell align="center">
-                        {team.all.win && team.all.draw
-                          ? team.all.win * 3 + team.all.draw
-                          : 0}
-                      </TableCell>
+                      <TableCell align="center">{team.points}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -338,9 +330,11 @@ export default function GroupsTables({
         ))}
       </Box>
 
-      <Box sx={{
-        mb: '40px'
-      }}>
+      <Box
+        sx={{
+          mb: "40px",
+        }}
+      >
         <Typography
           sx={{
             fontWeight: 700,
@@ -553,7 +547,7 @@ export default function GroupsTables({
 
           <Box
             sx={{
-              display: "flex"
+              display: "flex",
             }}
           >
             <Typography sx={{ fontWeight: 700 }}>О</Typography>
@@ -566,7 +560,6 @@ export default function GroupsTables({
               - Очки
             </Typography>
           </Box>
-
         </Box>
       </Box>
     </Box>
