@@ -44,7 +44,7 @@ export default function FixturesPage() {
             .filter((item, i, ar) => ar.indexOf(item) === i);
 
           setRounds(rounds);
-          setSelectedRound(rounds[0]);
+          setSelectedRound(rounds[1]);
           setStatus("resolved");
         }
       } catch (error) {
