@@ -51,3 +51,14 @@ interface IAuthContext {
   signIn: (login: string, password: string) => any;
   signOut: () => void;
 }
+
+
+interface IResetPwdFormData {
+  password: string;
+  repeatPassword: string;
+}
+
+interface IResetPwdErrors {
+  password: string | null;
+  rePassword: string | null;
+}

@@ -6,6 +6,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import signInValidator from "@/validation/signIn.validation";
+import Link from "next/link";
 
 const initialFormDataState = {
   login: "",
@@ -141,6 +142,17 @@ export default function SignInForm() {
             </Box>
           </Box>
         </form>
+        <Box
+          sx={{
+            mt: "10px",
+            fontSize: "14px",
+            ml: "5px",
+          }}
+        >
+          <Link className=" hover:underline" href={"/auth/reset"}>
+            Забули пароль?
+          </Link>
+        </Box>
       </Box>
     </>
   );
